@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
                 color: Color.fromRGBO(20, 51, 51, 1),
               ),
               title: TextStyle(
-                fontSize: 24,
-                fontFamily: 'RobotoCondensed',
+                fontSize: 22,
+                fontFamily: 'Raleway',
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -33,6 +33,13 @@ class MyApp extends StatelessWidget {
       routes: {
         CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
         MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
+      },
+      onGenerateRoute: (settings) {
+        print(settings.arguments);
+        //return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
+      },
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
       },
     );
   }
