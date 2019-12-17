@@ -11,7 +11,7 @@ class MealDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: Center(
-        child: Text('Rezept!'),
+        child: Text('Rezept!', textAlign: TextAlign.right,),
       ),
     );
   }
