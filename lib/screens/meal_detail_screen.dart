@@ -6,11 +6,28 @@ class MealDetailScreen extends StatelessWidget {
 
   Widget buildSectionTitle(BuildContext context, String text) {
     return Container(
-      margin: EdgeInsets.only(bottom: 10, top: 20),
+      margin: EdgeInsets.only(bottom: 10, top: 15),
       child: Text(
-        'Ingredients',
+        text,
         style: Theme.of(context).textTheme.title,
       ),
+    );
+  }
+
+  Widget buildContainer(Widget child) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(
+          color: Colors.grey,
+        ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+      padding: EdgeInsets.all(10),
+      height: 200,
+      width: double.infinity,
+      child: child,
     );
   }
 
@@ -25,42 +42,60 @@ class MealDetailScreen extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
-          Container(
-            height: 200,
-            width: double.infinity,
-            child: Image.network(
-              selectedMeal.imageUrl,
-              fit: BoxFit.cover,
+          Expanded(
+            flex: 1,
+                      child: Container(
+              height: 200,
+              width: double.infinity,
+              child: Image.network(
+                selectedMeal.imageUrl,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(bottom: 10, top: 20),
-            child: Text(
-              'Ingredients',
-              style: Theme.of(context).textTheme.title,
-            ),
-          ),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(
-                color: Colors.grey,
+
+          Expanded(
+            flex: 4,
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  buildSectionTitle(context, 'Ingredients'),
+                  buildContainer(
+                    ListView.builder(
+                      itemBuilder: (ctx, index) => Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(selectedMeal.ingredients[index]),
+                        ),
+                        color: Theme.of(context).accentColor,
+                      ),
+                      itemCount: selectedMeal.ingredients.length,
+                    ),
+                  ),
+                  buildSectionTitle(context, 'Steps'),
+                  buildContainer(
+                    ListView.builder(
+                      itemBuilder: (ctx, index) => Column(
+                        children: <Widget>[
+                          ListTile(
+                            leading: CircleAvatar(
+                              child: Text(
+                                '${(index + 1)}.',
+                              ),
+                            ),
+                            title: Text(
+                              selectedMeal.steps[index],
+                            ),
+                          ),
+                          Divider(),
+                        ],
+                      ),
+                      
+                      itemCount: selectedMeal.steps.length,
+                    ),
+                  ),
+                ],
               ),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            margin: EdgeInsets.all(10),
-            padding: EdgeInsets.all(10),
-            height: 200,
-            width: 350,
-            child: ListView.builder(
-              itemBuilder: (ctx, index) => Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(selectedMeal.ingredients[index]),
-                ),
-                color: Theme.of(context).accentColor,
-              ),
-              itemCount: selectedMeal.ingredients.length,
             ),
           ),
         ],
