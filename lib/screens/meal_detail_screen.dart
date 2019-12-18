@@ -44,7 +44,7 @@ class MealDetailScreen extends StatelessWidget {
         children: <Widget>[
           Expanded(
             flex: 1,
-                      child: Container(
+            child: Container(
               height: 200,
               width: double.infinity,
               child: Image.network(
@@ -53,7 +53,6 @@ class MealDetailScreen extends StatelessWidget {
               ),
             ),
           ),
-
           Expanded(
             flex: 4,
             child: SingleChildScrollView(
@@ -90,7 +89,6 @@ class MealDetailScreen extends StatelessWidget {
                           Divider(),
                         ],
                       ),
-                      
                       itemCount: selectedMeal.steps.length,
                     ),
                   ),
@@ -99,6 +97,12 @@ class MealDetailScreen extends StatelessWidget {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.delete),
+        onPressed: () {
+          Navigator.of(context).pop(mealId);
+        },
       ),
     );
   }
