@@ -7,7 +7,6 @@ class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Color.fromRGBO(255, 255, 255, 1),
         child: GridView(
           padding: EdgeInsets.all(20),
           children: DUMMY_CATEGORIES
